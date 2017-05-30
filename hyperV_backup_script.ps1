@@ -18,18 +18,18 @@
 
 ### SCRIPT SETTINGS
 
-$bTestRun =                     $False # Enable if you want the script to run & evaluate conditions but not actually write or delete any data.
-$bBackupToExternal =            $True  # Choose whether backups are copied to external drive if there is enough disk space.
-$bPurgeBackups =                $True  # Choose whether you want Backups older than the retention period specified above removed from the main drive
-$bPurgeBackupsExternal =        $True  # Choose whether you want Backups older than the retention period specified above removed from the external drive.
-$OutdatedBackupDay =            -10    # Backups older than 10 days on Main backup drive are removed.
-$OutdatedBackupDayExternal =    -20    # Backups older than 20 days on external drive are removed.
+$bTestRun =                     $False 	# Enable if you want the script to run & evaluate conditions but not actually modify the state of the VMs.
+$bBackupToExternal =            $True  	# Choose whether backups are copied to external drive if there is enough disk space.
+$bPurgeBackups =                $True  	# Choose whether you want Backups older than the retention period specified above removed from the main drive
+$bPurgeBackupsExternal =        $True  	# Choose whether you want Backups older than the retention period specified above removed from the external drive.
+$OutdatedBackupDay =            -10    	# Backups older than 10 days on Main backup drive are removed.
+$OutdatedBackupDayExternal =    -20    	# Backups older than 20 days on external drive are removed.
 
 [String]$BackupPathExternal =   "B:\Backups\"
-[String]$BackupPath = 			"D:\Backups\"
-[String]$LogFilePath = 		    "D:\Backups\"
+[String]$BackupPath = 		"D:\Backups\"
+[String]$LogFilePath = 		"D:\Backups\"
 [String[]]$EmailRecipients = 	@("address1@company.com", "address2@company.com")
-[String]$SMTPServer  = 			"relay.company.com"
+[String]$SMTPServer  = 		"relay.company.com"
 [String]$EmailFromAddress = 	"backups@company.com"
 [String]$EmailSubject =         "$env:computername Hyper-V Backup"
 
@@ -60,7 +60,7 @@ Function LogAndPrint
 Try
 {
     LogAndPrint "No pre-backup actions to perform"
-    LogAndPrint " " #Blank link for cleanliness
+    LogAndPrint " " #Blank line for cleanliness
 }
 Catch
 {
@@ -71,12 +71,12 @@ Catch
 ### SCRIPT LOGIC
 
 LogAndPrint "*** HYPER-V BACKUPS STARTING ***"
-LogAndPrint " " #Blank link for cleanliness
+LogAndPrint " " #Blank line for cleanliness
 
 ## PURGE OLD BACKUPS
 
 LogAndPrint "*** PURGING OLD BACKUPS FROM DESTINATION MEDIA ***"
-LogAndPrint " " #Blank link for cleanliness
+LogAndPrint " " #Blank line for cleanliness
 
 # Purge old backups from primary backup location
 
@@ -119,7 +119,7 @@ If ($bPurgeBackups)
 
 If ($bPurgeBackupsExternal)
 {
-    LogAndPrint " " #Blank link for cleanliness
+    LogAndPrint " " #Blank line for cleanliness
     LogAndPrint "Purging old backups from USB/external destination $BackupPathExternal is enabled. Looking for backups older than $OutdatedBackupDayExternal days:"
 
     $OutdatedBackupDateExternal = (Get-Date).AddDays($OutdatedBackupDayExternal).ToString('yyyy-MM-dd')
@@ -159,11 +159,11 @@ If ($bPurgeBackupsExternal)
 
 $BackupPath = $BackupPath + "Hyper-V-" + $StartDate + "\"
 
-LogAndPrint " " #Blank link for cleanliness
+LogAndPrint " " #Blank line for cleanliness
 LogAndPrint "*** STARTING VM OPTIMISATION AND EXPORT ***" 
-LogAndPrint " " #Blank link for cleanliness
+LogAndPrint " " #Blank line for cleanliness
 LogAndPrint "Backup location is $BackupPath" 
-LogAndPrint " " #Blank link for cleanliness
+LogAndPrint " " #Blank line for cleanliness
 
 Try
 {
@@ -275,13 +275,13 @@ Foreach ($VM_name in $List_of_VMs)
 } # End of main backup loop
 
 LogAndPrint "*** FINISHED VM EXPORTS ***" 
-LogAndPrint " " #Blank link for cleanliness
+LogAndPrint " " #Blank line for cleanliness
 
 ### COPY BACKUP TO EXTERNAL DISK
 
 
 LogAndPrint "*** STARTING BACKUP TO EXTERNAL DRIVE ***" 
-LogAndPrint " " #Blank link for cleanliness
+LogAndPrint " " #Blank line for cleanliness
 
 # If backing up to external drive is on, check if the size of today's backup is big enough to fit, 
 If ($bBackupToExternal)
@@ -319,7 +319,7 @@ If ($bBackupToExternal)
 
 ### POSTBACKUP ACTIONS
 
-LogAndPrint " " #Blank link for cleanliness
+LogAndPrint " " #Blank line for cleanliness
 
 Try
 {
@@ -330,7 +330,7 @@ Catch
     LogAndPrint "Post Backup actions failed: $($_.Exception.Message)"
 }
 
-LogAndPrint " " #Blank link for cleanliness
+LogAndPrint " " #Blank line for cleanliness
 
 # Write end timestamp to log
 LogAndPrint "*** HYPER-V BACKUPS COMPLETED ***"
