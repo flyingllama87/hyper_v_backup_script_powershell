@@ -17,5 +17,6 @@ Script to backup HyperV VMs written in powershell.  Complete with e-mail notific
 # - You're still better off paying for a commercial solution for business critical stuff.
 # - Happy to hear any constructive criticism towards this script.
 # - Run as Administrator
-# - Adjust script settings below
+# - Adjust script settings at top of script
 # - Script provided as-is
+# - Script is designed to handle errors and be robust (e.g. not just exit if a trivial error is encountered
