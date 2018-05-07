@@ -18,7 +18,6 @@
 
 ### SCRIPT SETTINGS
 
-$bTestRun =                     $False 	# Enable if you want the script to run & evaluate conditions but not actually modify the state of the VMs.
 $bBackupToExternal =            $True  	# Choose whether backups are copied to external drive if there is enough disk space.
 $bPurgeBackups =                $True  	# Choose whether you want Backups older than the retention period specified above removed from the main drive
 $bPurgeBackupsExternal =        $True  	# Choose whether you want Backups older than the retention period specified above removed from the external drive.
